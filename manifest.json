@@ -2,14 +2,15 @@
   "name": "Life Manager",
   "short_name": "Life Manager",
   "description": "Gestionnaire de vie personnelle",
-  "start_url": "/",
+  "start_url": "/lifeManager-tywebcreation/",
+  "scope": "/lifeManager-tywebcreation/",
   "display": "standalone",
   "background_color": "#1a1a1a",
   "theme_color": "#1a1a1a",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "/lifeManager-tywebcreation/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml"
     }
