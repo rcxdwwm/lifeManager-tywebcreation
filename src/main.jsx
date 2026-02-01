@@ -7,9 +7,12 @@ import { ThemeProvider } from './context/ThemeContext'
 import { ToastProvider } from './context/ToastContext'
 import './styles/index.css'
 
+// Basename pour GitHub Pages
+const basename = import.meta.env.BASE_URL
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <ThemeProvider>
         <ToastProvider>
           <AppProvider>
