@@ -49,6 +49,14 @@ const Sidebar = ({ isOpen, onClose }) => {
         <nav className="flex flex-col h-full p-4">
           {/* Logo / Brand */}
           <div className="mb-6 px-4">
+            {/* Logo entreprise */}
+            <div className="flex justify-center mb-3">
+              <img 
+                src="/lifeManager-tywebcreation/icon-192.png" 
+                alt="TyWebCreation Logo" 
+                className="h-16 w-16 rounded-xl shadow-soft"
+              />
+            </div>
             <h2 className="text-2xl font-display font-bold bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">
               Life Manager
             </h2>
@@ -84,6 +92,21 @@ const Sidebar = ({ isOpen, onClose }) => {
                   </NavLink>
                 )
               })}
+          </div>
+
+          {/* Copyright en bas */}
+          <div className="pt-4 mt-4 border-t border-surface-200 dark:border-surface-700">
+            <div className="text-center text-xs text-surface-400">
+              <span>© {new Date().getFullYear()} </span>
+              <a 
+                href="https://tywebcreation.fr" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-primary-500 hover:text-primary-600 hover:underline"
+              >
+                TyWebCreation.fr
+              </a>
+            </div>
           </div>
 
           {/* Settings en bas */}
