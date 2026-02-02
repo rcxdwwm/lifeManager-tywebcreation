@@ -227,9 +227,8 @@ const SettingsPage = () => {
             privées et stockées localement.
           </p>
 
-          <div className="flex items-center gap-2 text-sm text-primary-600 hover:text-primary-700">
-            <Info className="h-4 w-4" />
-            <span>Développé avec React et Tailwind CSS</span>
+          <div className="flex items-center gap-2 text-sm text-surface-500">
+            <span>© {new Date().getFullYear()} TyWebCreation.fr - Tous droits réservés</span>
           </div>
         </div>
       </Card>

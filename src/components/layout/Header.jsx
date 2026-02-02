@@ -25,18 +25,11 @@ const Header = ({ onMenuClick, isSidebarOpen }) => {
   const infoModal = useModal()
   const [clearConfirmOpen, { setTrue: openClearConfirm, setFalse: closeClearConfirm }] = useBoolean(false)
 
-  // État pour masquer l'icône info (si l'utilisateur ne veut plus voir la note)
-  const [hideInfoIcon, setHideInfoIcon] = useLocalStorage(`${STORAGE_PREFIX}-hide-backup-info`, false)
 
   // Obtenir le titre de la page actuelle
   const currentModule = getModuleByPath(location.pathname)
   const pageTitle = currentModule?.name || 'Life Manager'
 
-  // Fermer la modal info et masquer l'icône
-  const handleCloseInfoAndHide = () => {
-    setHideInfoIcon(true)
-    infoModal.close()
-  }
 
   // Export des données
   const handleExport = () => {
@@ -112,8 +105,7 @@ const Header = ({ onMenuClick, isSidebarOpen }) => {
 
           {/* Droite: Actions */}
           <div className="flex items-center gap-2">
-            {/* Bouton info - toujours visible sauf si masqué */}
-            {!hideInfoIcon && (
+            {/* Bouton info */}
               <button
                 onClick={infoModal.open}
                 className="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-colors"
@@ -122,7 +114,6 @@ const Header = ({ onMenuClick, isSidebarOpen }) => {
               >
                 <Info className="h-5 w-5" />
               </button>
-            )}
 
             {/* Toggle thème */}
             <button
@@ -186,20 +177,13 @@ const Header = ({ onMenuClick, isSidebarOpen }) => {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 pt-4">
+          <div className="pt-4">
             <Button
               variant="primary"
-              className="flex-1"
+              className="w-full"
               onClick={infoModal.close}
             >
               J'ai compris
-            </Button>
-            <Button
-              variant="ghost"
-              className="flex-1 text-surface-500"
-              onClick={handleCloseInfoAndHide}
-            >
-              Ne plus afficher
             </Button>
           </div>
         </div>
