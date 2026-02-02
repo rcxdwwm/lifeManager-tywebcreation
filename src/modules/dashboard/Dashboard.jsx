@@ -83,6 +83,15 @@ const Dashboard = () => {
         />
 
         <StatCard
+          title="Courses"
+          value={shoppingCount}
+          icon={ShoppingCart}
+          color="warning"
+          link="/shopping"
+          subtitle={shoppingCount > 0 ? `${shoppingCount} produit${shoppingCount > 1 ? 's' : ''}` : 'Liste vide'}
+        />  
+
+        <StatCard
           title="Livres"
           value={stats.books.total}
           icon={BookOpen}
@@ -98,15 +107,6 @@ const Dashboard = () => {
           color="success"
           link="/vehicles"
           subtitle={formatPrice(stats.vehicles.totalCosts)}
-        />
-
-        <StatCard
-          title="Courses"
-          value={shoppingCount}
-          icon={ShoppingCart}
-          color="warning"
-          link="/shopping"
-          subtitle={shoppingCount > 0 ? `${shoppingCount} produit${shoppingCount > 1 ? 's' : ''}` : 'Liste vide'}
         />
 
         <StatCard
