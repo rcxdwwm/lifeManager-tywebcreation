@@ -54,7 +54,7 @@ const Sidebar = ({ isOpen, onClose }) => {
               <img 
                 src={`${import.meta.env.BASE_URL}icon-192.png`}
                 alt="TyWebCreation Logo" 
-                className="h-20 w-20 rounded-xl shadow-soft transition-transform duration-300 hover:scale-200"
+                className="h-20 w-20 rounded-xl shadow-soft transform transition-transform duration-300 hover:scale-150"
               />
             </div>
             <h2 className="text-2xl font-display font-bold bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">
