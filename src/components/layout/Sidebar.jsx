@@ -52,15 +52,15 @@ const Sidebar = ({ isOpen, onClose }) => {
             {/* Logo entreprise */}
             <div className="flex justify-center mb-3">
               <img 
-                src="/life-manager/public/icon-192.png" 
+                src={`${import.meta.env.BASE_URL}icon-192.png`}
                 alt="TyWebCreation Logo" 
                 className="h-16 w-16 rounded-xl shadow-soft"
               />
             </div>
-            <h2 className="text-2xl font-display font-bold bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">
+            <h2 className="text-center text-2xl font-display font-bold bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">
               Life Manager
             </h2>
-            <p className="text-xs text-surface-500 mt-1">
+            <p className="text-center text-xs text-surface-500 mt-1">
               Organisez votre vie simplement
             </p>
           </div>
@@ -95,7 +95,7 @@ const Sidebar = ({ isOpen, onClose }) => {
           </div>
 
           {/* Copyright en bas */}
-          <div className="pt-4 mt-4 border-t border-surface-200 dark:border-surface-700">
+          <div className="pt-4 mt-4 border-t border-surface-200 dark:border-surface-700 mb-6">
             <div className="text-center text-xs text-surface-400">
               <span>© {new Date().getFullYear()} </span>
               <a 
