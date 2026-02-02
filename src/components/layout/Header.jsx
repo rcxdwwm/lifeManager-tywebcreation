@@ -4,14 +4,15 @@
 
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, Sun, Moon, Download, Upload, Trash2 } from 'lucide-react'
+import { Menu, X, Sun, Moon, Download, Upload, Trash2, Info } from 'lucide-react'
 import { useTheme } from '../../context/ThemeContext'
 import { useApp } from '../../context/AppContext'
 import { useToast } from '../../context/ToastContext'
-import { useIsMobile, useModal, useBoolean } from '../../hooks'
+import { useIsMobile, useModal, useBoolean, useLocalStorage } from '../../hooks'
 import { downloadJSON, generateExportFilename, readJSONFile } from '../../utils/helpers'
 import { getModuleByPath } from '../../config/modules'
 import { Modal, Button, ConfirmDialog } from '../common'
+import { STORAGE_PREFIX } from '../../utils/constants'
 
 const Header = ({ onMenuClick, isSidebarOpen }) => {
   const location = useLocation()
@@ -23,9 +24,18 @@ const Header = ({ onMenuClick, isSidebarOpen }) => {
   const settingsModal = useModal()
   const [clearConfirmOpen, { setTrue: openClearConfirm, setFalse: closeClearConfirm }] = useBoolean(false)
 
+  // État pour la note d'information (partagé avec Dashboard)
+  const [showInfoNote, setShowInfoNote] = useLocalStorage(`${STORAGE_PREFIX}-show-backup-info`, true)
+
   // Obtenir le titre de la page actuelle
   const currentModule = getModuleByPath(location.pathname)
   const pageTitle = currentModule?.name || 'Life Manager'
+
+  // Réafficher la note d'information
+  const handleShowInfo = () => {
+    setShowInfoNote(true)
+    toast.info('Note d\'information réactivée sur le tableau de bord')
+  }
 
   // Export des données
   const handleExport = () => {
@@ -101,6 +111,18 @@ const Header = ({ onMenuClick, isSidebarOpen }) => {
 
           {/* Droite: Actions */}
           <div className="flex items-center gap-2">
+            {/* Bouton info - visible seulement si la note est masquée */}
+            {!showInfoNote && (
+              <button
+                onClick={handleShowInfo}
+                className="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-colors"
+                aria-label="Afficher les informations importantes"
+                title="Afficher la note d'information"
+              >
+                <Info className="h-5 w-5" />
+              </button>
+            )}
+
             {/* Toggle thème */}
             <button
               onClick={toggleTheme}
