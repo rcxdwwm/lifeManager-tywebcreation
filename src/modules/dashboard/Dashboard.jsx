@@ -12,9 +12,6 @@ import {
   AlertTriangle,
   Calendar,
   ArrowRight,
-  Download,
-  Info,
-  X,
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
@@ -24,9 +21,6 @@ import { STORAGE_PREFIX } from '../../utils/constants'
 
 const Dashboard = () => {
   const { todos, books, vehicles, interventions, stats, backupAvailable, backupInfo, restoreFromBackup, dismissBackup } = useApp()
-
-  // État pour masquer la note d'information
-  const [showInfoNote, setShowInfoNote] = useLocalStorage(`${STORAGE_PREFIX}-show-backup-info`, true)
 
   // Récupérer le panier de courses
   const [shoppingCart] = useLocalStorage(`${STORAGE_PREFIX}-shopping-cart`, [])
@@ -124,48 +118,6 @@ const Dashboard = () => {
           subtitle="Dans les 30 jours"
         />
       </div>
-
-      {/* Note d'information sur les sauvegardes */}
-      {showInfoNote && (
-        <Card className="border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-900/20">
-          <div className="flex gap-4">
-            <div className="flex-shrink-0">
-              <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center">
-                <Info className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-              </div>
-            </div>
-            <div className="flex-1">
-              <div className="flex items-start justify-between">
-                <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-1">
-                  💾 Pensez à sauvegarder vos données !
-                </h3>
-                <button
-                  onClick={() => setShowInfoNote(false)}
-                  className="p-1 text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-800 transition-colors"
-                  aria-label="Fermer"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-              <p className="text-sm text-blue-700 dark:text-blue-300 mb-3">
-                Vos données sont stockées <strong>uniquement sur cet appareil</strong>. Elles peuvent être perdues si vous :
-              </p>
-              <ul className="text-sm text-blue-600 dark:text-blue-400 mb-3 space-y-1">
-                <li>• Videz le cache ou l'historique de Safari</li>
-                <li>• Réinitialisez votre appareil</li>
-                <li>• N'utilisez pas l'app pendant plus de 7 jours (iOS)</li>
-              </ul>
-              <p className="text-sm text-blue-700 dark:text-blue-300">
-                <strong>Conseil :</strong> Exportez régulièrement vos données en cliquant sur 
-                <span className="inline-flex items-center mx-1 px-1.5 py-0.5 bg-blue-100 dark:bg-blue-800 rounded">
-                  <Download className="h-3 w-3" />
-                </span>
-                en haut à droite de l'écran.
-              </p>
-            </div>
-          </div>
-        </Card>
-      )}
 
       {backupAvailable && (
         <div className="p-4 bg-warning-light dark:bg-amber-900/30 border border-warning dark:border-amber-700 rounded-xl">

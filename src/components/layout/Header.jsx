@@ -22,19 +22,20 @@ const Header = ({ onMenuClick, isSidebarOpen }) => {
   const isMobile = useIsMobile()
   
   const settingsModal = useModal()
+  const infoModal = useModal()
   const [clearConfirmOpen, { setTrue: openClearConfirm, setFalse: closeClearConfirm }] = useBoolean(false)
 
-  // État pour la note d'information (partagé avec Dashboard)
-  const [showInfoNote, setShowInfoNote] = useLocalStorage(`${STORAGE_PREFIX}-show-backup-info`, true)
+  // État pour masquer l'icône info (si l'utilisateur ne veut plus voir la note)
+  const [hideInfoIcon, setHideInfoIcon] = useLocalStorage(`${STORAGE_PREFIX}-hide-backup-info`, false)
 
   // Obtenir le titre de la page actuelle
   const currentModule = getModuleByPath(location.pathname)
   const pageTitle = currentModule?.name || 'Life Manager'
 
-  // Réafficher la note d'information
-  const handleShowInfo = () => {
-    setShowInfoNote(true)
-    toast.info('Note d\'information réactivée sur le tableau de bord')
+  // Fermer la modal info et masquer l'icône
+  const handleCloseInfoAndHide = () => {
+    setHideInfoIcon(true)
+    infoModal.close()
   }
 
   // Export des données
@@ -111,13 +112,13 @@ const Header = ({ onMenuClick, isSidebarOpen }) => {
 
           {/* Droite: Actions */}
           <div className="flex items-center gap-2">
-            {/* Bouton info - visible seulement si la note est masquée */}
-            {!showInfoNote && (
+            {/* Bouton info - toujours visible sauf si masqué */}
+            {!hideInfoIcon && (
               <button
-                onClick={handleShowInfo}
+                onClick={infoModal.open}
                 className="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-colors"
-                aria-label="Afficher les informations importantes"
-                title="Afficher la note d'information"
+                aria-label="Informations importantes"
+                title="Informations importantes"
               >
                 <Info className="h-5 w-5" />
               </button>
@@ -147,6 +148,62 @@ const Header = ({ onMenuClick, isSidebarOpen }) => {
           </div>
         </div>
       </header>
+
+      {/* Modal d'information sur les sauvegardes */}
+      <Modal
+        isOpen={infoModal.isOpen}
+        onClose={infoModal.close}
+        title="💾 Information importante"
+        size="md"
+      >
+        <div className="space-y-4">
+          <p className="text-surface-700 dark:text-surface-300">
+            Vos données sont stockées <strong>uniquement sur cet appareil</strong>. Elles peuvent être perdues si vous :
+          </p>
+          
+          <ul className="space-y-2 text-surface-600 dark:text-surface-400">
+            <li className="flex items-start gap-2">
+              <span className="text-danger">•</span>
+              <span>Videz le cache ou l'historique de Safari/Chrome</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-danger">•</span>
+              <span>Réinitialisez votre appareil</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-danger">•</span>
+              <span>N'utilisez pas l'app pendant plus de 7 jours sur iOS</span>
+            </li>
+          </ul>
+
+          <div className="p-4 bg-blue-50 dark:bg-blue-900/30 rounded-xl">
+            <p className="text-sm text-blue-700 dark:text-blue-300">
+              <strong>💡 Conseil :</strong> Exportez régulièrement vos données en cliquant sur l'icône 
+              <span className="inline-flex items-center mx-1 px-1.5 py-0.5 bg-blue-100 dark:bg-blue-800 rounded">
+                <Download className="h-3 w-3" />
+              </span>
+              en haut à droite de l'écran.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 pt-4">
+            <Button
+              variant="primary"
+              className="flex-1"
+              onClick={infoModal.close}
+            >
+              J'ai compris
+            </Button>
+            <Button
+              variant="ghost"
+              className="flex-1 text-surface-500"
+              onClick={handleCloseInfoAndHide}
+            >
+              Ne plus afficher
+            </Button>
+          </div>
+        </div>
+      </Modal>
 
       {/* Modal de gestion des données */}
       <Modal
