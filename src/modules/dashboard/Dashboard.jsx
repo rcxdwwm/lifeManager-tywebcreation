@@ -45,11 +45,11 @@ const Dashboard = () => {
   }, [todos.items])
 
   // Livres en cours de lecture
-  //const currentlyReading = useMemo(() => {
-  //  return books.items
-  //    .filter((b) => b.status === 'reading')
-  //    .slice(0, 3)
-  //}, [books.items])
+  const currentlyReading = useMemo(() => {
+    return books.items
+      .filter((b) => b.status === 'reading')
+      .slice(0, 3)
+  }, [books.items])
 
   // Prochaines interventions véhicules
   const upcomingInterventions = useMemo(() => {
