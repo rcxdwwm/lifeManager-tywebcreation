@@ -52,7 +52,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             {/* Logo entreprise */}
             <div className="flex justify-center mb-3">
               <img 
-                src="/lifeManager-tywebcreation/icon-192.png" 
+                src="/life-manager/public/icon-192.png" 
                 alt="TyWebCreation Logo" 
                 className="h-16 w-16 rounded-xl shadow-soft"
               />
