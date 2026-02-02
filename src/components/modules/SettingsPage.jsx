@@ -227,8 +227,17 @@ const SettingsPage = () => {
             privées et stockées localement.
           </p>
 
-          <div className="flex items-center gap-2 text-sm text-surface-500">
-            <span>© {new Date().getFullYear()} TyWebCreation.fr - Tous droits réservés</span>
+          <div className="text-sm text-surface-500">
+            <span>© {new Date().getFullYear()} </span>
+            <a 
+              href="https://tywebcreation.fr" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-primary-600 hover:text-primary-700 hover:underline"
+            >
+              TyWebCreation.fr
+            </a>
+            <span> - Tous droits réservés</span>
           </div>
         </div>
       </Card>
