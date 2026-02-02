@@ -20,9 +20,9 @@ const App = () => {
 
         {/* Modules */}
         <Route path="todo" element={<TodoModule />} />
+        <Route path="shopping" element={<ShoppingModule />} />
         <Route path="library" element={<LibraryModule />} />
         <Route path="vehicles" element={<VehiclesModule />} />
-        <Route path="shopping" element={<ShoppingModule />} />
 
         {/* Settings */}
         <Route path="settings" element={<SettingsPage />} />
