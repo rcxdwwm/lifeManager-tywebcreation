@@ -183,6 +183,40 @@ const Dashboard = () => {
           )}
         </Card>
 
+        {/* Lectures en cours */}
+        <Card>
+          <Card.Header>
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-accent-100 dark:bg-accent-900/30 rounded-lg">
+                <BookOpen className="h-5 w-5 text-accent-600" />
+              </div>
+              <div>
+                <Card.Title>En cours de lecture</Card.Title>
+                <Card.Description>{stats.books.reading} livre(s)</Card.Description>
+              </div>
+            </div>
+            <Link
+              to="/library"
+              className="text-sm text-primary-600 hover:text-primary-700 font-medium flex items-center gap-1"
+            >
+              Voir tout
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </Card.Header>
+
+          {currentlyReading.length > 0 ? (
+            <div className="space-y-3">
+              {currentlyReading.map((book) => (
+                <BookItem key={book.id} book={book} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-surface-500 dark:text-surface-400 text-center py-6">
+              📚 Aucun livre en cours
+            </p>
+          )}
+        </Card>
+
         {/* Interventions à venir */}
         <Card className="lg:col-span-2">
           <Card.Header>
