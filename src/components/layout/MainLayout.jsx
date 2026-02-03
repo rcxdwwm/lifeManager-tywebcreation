@@ -8,24 +8,22 @@ import Header from './Header'
 import Sidebar from './Sidebar'
 import { ToastContainer } from '../common'
 import { cn } from '../../utils/helpers'
-import { useIsMobile, useLocalStorage } from '../../hooks'
-import { STORAGE_PREFIX } from '../../utils/constants'
+import { useIsMobile } from '../../hooks'
 
 const MainLayout = () => {
   const isMobile = useIsMobile()
   
-  // Sauvegarde si l'utilisateur a déjà vu l'app (première visite)
-  const [hasVisited, setHasVisited] = useLocalStorage(`${STORAGE_PREFIX}-has-visited`, false)
-  
-  // Sidebar ouverte par défaut sur mobile à la première visite
+  // Sidebar ouverte par défaut sur mobile à chaque ouverture de l'app
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [initialLoad, setInitialLoad] = useState(true)
 
-  // Ouvrir la sidebar sur mobile à la première visite
+  // Ouvrir la sidebar sur mobile à chaque chargement initial de l'app
   useEffect(() => {
-    if (isMobile && !hasVisited) {
+    if (isMobile && initialLoad) {
       setSidebarOpen(true)
+      setInitialLoad(false)
     }
-  }, [isMobile, hasVisited])
+  }, [isMobile, initialLoad])
 
   const toggleSidebar = useCallback(() => {
     setSidebarOpen((prev) => !prev)
@@ -33,25 +31,26 @@ const MainLayout = () => {
 
   const closeSidebar = useCallback(() => {
     setSidebarOpen(false)
-    // Marquer comme visité lors de la première fermeture
-    if (!hasVisited) {
-      setHasVisited(true)
-    }
-  }, [hasVisited, setHasVisited])
+  }, [])
 
   return (
     <div className="min-h-screen bg-surface-50 dark:bg-surface-950">
-      {/* Header */}
-      <Header onMenuClick={toggleSidebar} isSidebarOpen={sidebarOpen} />
+      {/* Header - masqué quand sidebar ouverte sur mobile */}
+      <div className={cn(
+        sidebarOpen && isMobile ? 'hidden' : 'block'
+      )}>
+        <Header onMenuClick={toggleSidebar} isSidebarOpen={sidebarOpen} />
+      </div>
 
       {/* Sidebar */}
       <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
 
-      {/* Main content */}
+      {/* Main content - masqué quand sidebar ouverte sur mobile */}
       <main
         className={cn(
           'transition-all duration-300 min-h-[calc(100vh-4rem)]',
-          'lg:ml-64' // Marge pour la sidebar sur desktop
+          'lg:ml-64',
+          sidebarOpen && isMobile ? 'hidden' : 'block'
         )}
       >
         <div className="p-4 lg:p-6 max-w-7xl mx-auto">
