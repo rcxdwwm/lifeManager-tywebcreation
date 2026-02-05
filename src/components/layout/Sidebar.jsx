@@ -3,7 +3,6 @@
  */
 
 import { NavLink } from 'react-router-dom'
-import { X } from 'lucide-react'
 import { getNavModules } from '../../config/modules'
 import { useApp } from '../../context/AppContext'
 import { cn } from '../../utils/helpers'
@@ -51,14 +50,6 @@ const Sidebar = ({ isOpen, onClose }) => {
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
-        {/* Bouton fermer - visible uniquement sur mobile */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 p-2 text-surface-500 hover:text-surface-700 hover:bg-surface-100 dark:hover:bg-surface-800 rounded-lg transition-colors lg:hidden"
-          aria-label="Fermer le menu"
-        >
-          <X className="h-6 w-6" />
-        </button>
 
         <nav className="flex flex-col h-full p-4 pt-16 lg:pt-4">
           {/* Logo / Brand */}

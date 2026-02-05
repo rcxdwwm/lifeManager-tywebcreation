@@ -12,6 +12,7 @@ const defaultValues = {
   brand: '',
   model: '',
   year: '',
+  month: '',
   licensePlate: '',
   currentMileage: '',
   fuelType: '',
@@ -51,6 +52,7 @@ const VehicleForm = ({ isOpen, onClose, onSave, initialData }) => {
       model: data.model.trim(),
       licensePlate: data.licensePlate.trim().toUpperCase(),
       year: data.year ? parseInt(data.year, 10) : null,
+      month: data.month ? parseInt(data.month, 10) : null,
       currentMileage: data.currentMileage ? parseInt(data.currentMileage, 10) : 0,
       purchaseDate: data.purchaseDate
         ? new Date(data.purchaseDate).toISOString()
@@ -69,6 +71,7 @@ const VehicleForm = ({ isOpen, onClose, onSave, initialData }) => {
           brand: initialData.brand || '',
           model: initialData.model || '',
           year: initialData.year || '',
+          month: initialData.month || '',
           licensePlate: initialData.licensePlate || '',
           currentMileage: initialData.currentMileage || '',
           fuelType: initialData.fuelType || '',
@@ -139,16 +142,40 @@ const VehicleForm = ({ isOpen, onClose, onSave, initialData }) => {
             required
           />
 
-          <Input
-            label="Année"
-            name="year"
-            type="number"
-            min="1900"
-            max={currentYear + 1}
-            value={values.year}
-            onChange={handleChange}
-            placeholder={currentYear.toString()}
-          />
+          <div className="grid grid-cols-2 gap-2">
+            <Select
+              label="Mois"
+              name="month"
+              value={values.month}
+              onChange={handleChange}
+              options={[
+                { value: '', label: 'Mois...' },
+                { value: '1', label: '01 - Jan' },
+                { value: '2', label: '02 - Fév' },
+                { value: '3', label: '03 - Mar' },
+                { value: '4', label: '04 - Avr' },
+                { value: '5', label: '05 - Mai' },
+                { value: '6', label: '06 - Juin' },
+                { value: '7', label: '07 - Juil' },
+                { value: '8', label: '08 - Août' },
+                { value: '9', label: '09 - Sep' },
+                { value: '10', label: '10 - Oct' },
+                { value: '11', label: '11 - Nov' },
+                { value: '12', label: '12 - Déc' },
+              ]}
+            />
+
+            <Input
+              label="Année"
+              name="year"
+              type="number"
+              min="1900"
+              max={currentYear + 1}
+              value={values.year}
+              onChange={handleChange}
+              placeholder={currentYear.toString()}
+            />
+          </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4">

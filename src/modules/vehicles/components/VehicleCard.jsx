@@ -118,9 +118,14 @@ const VehicleCard = ({
               {vehicle.licensePlate}
             </Badge>
 
-            {vehicle.year && (
+            {(vehicle.year || vehicle.month) && (
               <Badge variant="neutral" size="sm">
-                {vehicle.year}
+                {vehicle.month && vehicle.year 
+                  ? `${String(vehicle.month).padStart(2, '0')}/${vehicle.year}`
+                  : vehicle.month 
+                    ? `${String(vehicle.month).padStart(2, '0')}/----`
+                    : vehicle.year
+                }
               </Badge>
             )}
 
