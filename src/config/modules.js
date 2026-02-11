@@ -69,7 +69,7 @@ export const MODULES_CONFIG = {
   },
   settings: {
     id: 'settings',
-    name: 'Paramètres',
+    name: 'Infos & paramètres',
     description: "Configuration de l'application",
     icon: Settings,
     path: '/settings',

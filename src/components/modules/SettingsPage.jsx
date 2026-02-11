@@ -69,45 +69,67 @@ const SettingsPage = () => {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-fade-in">
-      {/* Apparence */}
+      
+
+      {/* Infos & paramètres */}
       <Card>
         <Card.Header>
-          <Card.Title>Apparence</Card.Title>
+          <Card.Title>Infos & paramètres</Card.Title>
         </Card.Header>
 
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium text-surface-900 dark:text-white">Thème</p>
-              <p className="text-sm text-surface-500">
-                Choisissez entre le mode clair et sombre
-              </p>
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center">
+                <span className="text-white font-bold text-xl">LM</span>
+              </div>
+              <div>
+                <p className="font-semibold text-surface-900 dark:text-white">
+                  Life Manager
+                </p>
+                <p className="text-sm text-surface-500">Version {APP_VERSION}</p>
+              </div>
             </div>
+          </div>
+          <div>      
+            Statut expérimental de l’application
+          </div>
+            <p className="text-sm text-surface-600 dark:text-surface-400">
+            Life Manager est un prototype expérimental proposé gratuitement, sans inscription et sans aucune garantie de disponibilité ou de continuité. L’application peut être modifiée, suspendue ou retirée à tout moment.
+            </p>
 
-            <div className="flex bg-surface-100 dark:bg-surface-800 rounded-lg p-1">
-              <button
-                onClick={() => theme !== 'light' && toggleTheme()}
-                className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors ${
-                  theme === 'light'
-                    ? 'bg-white dark:bg-surface-700 shadow-sm'
-                    : 'text-surface-500 hover:text-surface-700'
-                }`}
-              >
-                <Sun className="h-4 w-4" />
-                <span className="text-sm">Clair</span>
-              </button>
-              <button
-                onClick={() => theme !== 'dark' && toggleTheme()}
-                className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors ${
-                  theme === 'dark'
-                    ? 'bg-white dark:bg-surface-700 shadow-sm'
-                    : 'text-surface-500 hover:text-surface-700'
-                }`}
-              >
-                <Moon className="h-4 w-4" />
-                <span className="text-sm">Sombre</span>
-              </button>
-            </div>
+            <p className="text-sm text-surface-600 dark:text-surface-400">
+            En cas d’arrêt définitif du service, TyWebCreation s’efforcera, dans la mesure du possible, de publier un préavis d’information directement dans l’application.
+            </p>
+
+            <p className="text-sm text-surface-600 dark:text-surface-400">
+            Toutes les données sont stockées localement sur votre appareil. Aucune donnée personnelle n’est collectée, transmise ou exploitée à des fins commerciales. Il est recommandé d’exporter régulièrement vos données via l’icône
+            <span className="inline-flex items-center mx-1 px-1.5 py-0.5 bg-blue-100 dark:bg-blue-800 rounded">
+            <Download className="h-3 w-3" />
+            </span>
+            en haut à droite de l’écran.
+            </p>
+
+            <p className="text-sm text-surface-600 dark:text-surface-400">
+            TyWebCreation décline toute responsabilité concernant les erreurs, omissions, pertes de données, dysfonctionnements ou conséquences liées à l’utilisation ou à l’arrêt de l’application. Si vous estimez que son utilisation présente un risque, vous êtes invité à la désinstaller de votre appareil.
+            </p>
+
+            <p className="text-sm text-surface-600 dark:text-surface-400">
+            L’application est développée de manière indépendante, libre et non commerciale. Des mises à jour peuvent être proposées ponctuellement, sans obligation de fréquence ou de maintien.
+            </p>
+          
+
+          <div className="text-sm text-surface-500">
+            <span>© {new Date().getFullYear()} </span>
+            <a 
+              href="https://tywebcreation.fr" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-primary-600 hover:text-primary-700 hover:underline"
+            >
+              TyWebCreation.fr
+            </a>
+            <span> - Tous droits réservés</span>
           </div>
         </div>
       </Card>
@@ -200,47 +222,49 @@ const SettingsPage = () => {
         </p>
       </Card>
 
-      {/* À propos */}
+      {/* Apparence */}
       <Card>
         <Card.Header>
-          <Card.Title>À propos</Card.Title>
+          <Card.Title>Apparence</Card.Title>
         </Card.Header>
 
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-xl">LM</span>
-              </div>
-              <div>
-                <p className="font-semibold text-surface-900 dark:text-white">
-                  Life Manager
-                </p>
-                <p className="text-sm text-surface-500">Version {APP_VERSION}</p>
-              </div>
+            <div>
+              <p className="font-medium text-surface-900 dark:text-white">Thème</p>
+              <p className="text-sm text-surface-500">
+                Choisissez entre le mode clair et sombre
+              </p>
             </div>
-          </div>
 
-          <p className="text-sm text-surface-600 dark:text-surface-400">
-            Une application modulaire pour organiser votre vie : tâches, lectures,
-            maintenance de véhicules et plus encore. Toutes vos données restent
-            privées et stockées localement.
-          </p>
-
-          <div className="text-sm text-surface-500">
-            <span>© {new Date().getFullYear()} </span>
-            <a 
-              href="https://tywebcreation.fr" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-primary-600 hover:text-primary-700 hover:underline"
-            >
-              TyWebCreation.fr
-            </a>
-            <span> - Tous droits réservés</span>
+            <div className="flex bg-surface-100 dark:bg-surface-800 rounded-lg p-1">
+              <button
+                onClick={() => theme !== 'light' && toggleTheme()}
+                className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors ${
+                  theme === 'light'
+                    ? 'bg-white dark:bg-surface-700 shadow-sm'
+                    : 'text-surface-500 hover:text-surface-700'
+                }`}
+              >
+                <Sun className="h-4 w-4" />
+                <span className="text-sm">Clair</span>
+              </button>
+              <button
+                onClick={() => theme !== 'dark' && toggleTheme()}
+                className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors ${
+                  theme === 'dark'
+                    ? 'bg-white dark:bg-surface-700 shadow-sm'
+                    : 'text-surface-500 hover:text-surface-700'
+                }`}
+              >
+                <Moon className="h-4 w-4" />
+                <span className="text-sm">Sombre</span>
+              </button>
+            </div>
           </div>
         </div>
       </Card>
+
 
       {/* Confirmation de suppression */}
       <ConfirmDialog
