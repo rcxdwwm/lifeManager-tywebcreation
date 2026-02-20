@@ -24,7 +24,7 @@ import {
 import TodoList from './components/TodoList'
 import TodoForm from './components/TodoForm'
 import TodoCalendar from './components/TodoCalendar'
-import DEFAULT_TODO_CATEGORIES from '../../utils/constants'
+import {DEFAULT_TODO_CATEGORIES }from '../../utils/constants'
 
 const TodoModule = () => {
   const { items: todos, add, update, remove } = useTodos()
