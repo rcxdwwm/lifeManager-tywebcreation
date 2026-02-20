@@ -67,9 +67,14 @@ const TodoList = ({
       }
     })
 
-    // Trier chaque groupe par priorité puis par date
+    // Trier chaque groupe par date
     Object.keys(groups).forEach((key) => {
-      groups[key] = sortBy(groups[key], 'priority', 'asc')
+      groups[key] = groups[key].sort((a, b) => {
+        if (!a.dueDate && !b.dueDate) return 0
+        if (!a.dueDate) return 1
+        if (!b.dueDate) return -1
+        return new Date(a.dueDate) - new Date(b.dueDate)
+      })
     })
 
     return groups

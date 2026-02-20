@@ -5,17 +5,12 @@
 import { useEffect } from 'react'
 import { Modal, Input, Select, Textarea, Button } from '../../../components/common'
 import { useForm } from '../../../hooks'
-import {
-  PRIORITIES,
-  PRIORITY_LABELS,
-  DEFAULT_TODO_CATEGORIES,
-} from '../../../utils/constants'
+import {  DEFAULT_TODO_CATEGORIES,} from '../../../utils/constants'
 
 const defaultValues = {
   title: '',
   description: '',
   category: 'personal',
-  priority: PRIORITIES.MEDIUM,
   dueDate: '',
   dueTime: '',
 }
@@ -58,7 +53,6 @@ const TodoForm = ({ isOpen, onClose, onSave, initialData }) => {
           title: initialData.title || '',
           description: initialData.description || '',
           category: initialData.category || 'personal',
-          priority: initialData.priority || PRIORITIES.MEDIUM,
           dueDate: initialData.dueDate
             ? new Date(initialData.dueDate).toISOString().split('T')[0]
             : '',
@@ -69,11 +63,6 @@ const TodoForm = ({ isOpen, onClose, onSave, initialData }) => {
       }
     }
   }, [isOpen, initialData, reset])
-
-  const priorityOptions = Object.entries(PRIORITY_LABELS).map(([value, label]) => ({
-    value,
-    label,
-  }))
 
   const categoryOptions = DEFAULT_TODO_CATEGORIES.map((c) => ({
     value: c.id,
@@ -109,14 +98,6 @@ const TodoForm = ({ isOpen, onClose, onSave, initialData }) => {
         />
 
         <div className="grid grid-cols-2 gap-4">
-          <Select
-            label="Priorité"
-            name="priority"
-            value={values.priority}
-            onChange={handleChange}
-            options={priorityOptions}
-          />
-
           <Select
             label="Catégorie"
             name="category"

@@ -24,7 +24,7 @@ import {
 import TodoList from './components/TodoList'
 import TodoForm from './components/TodoForm'
 import TodoCalendar from './components/TodoCalendar'
-import { PRIORITIES, PRIORITY_LABELS, DEFAULT_TODO_CATEGORIES } from '../../utils/constants'
+import DEFAULT_TODO_CATEGORIES from '../../utils/constants'
 
 const TodoModule = () => {
   const { items: todos, add, update, remove } = useTodos()
@@ -37,7 +37,6 @@ const TodoModule = () => {
   // Filtres
   const [showFilters, { toggle: toggleFilters }] = useBoolean(false)
   const [statusFilter, setStatusFilter] = useState('all') // all, active, completed
-  const [priorityFilter, setPriorityFilter] = useState('')
   const [categoryFilter, setCategoryFilter] = useState('')
 
   // Filtrage et recherche
@@ -58,18 +57,13 @@ const TodoModule = () => {
       result = result.filter((t) => t.completed)
     }
 
-    // Filtre par priorité
-    if (priorityFilter) {
-      result = result.filter((t) => t.priority === priorityFilter)
-    }
-
     // Filtre par catégorie
     if (categoryFilter) {
       result = result.filter((t) => t.category === categoryFilter)
     }
 
     return result
-  }, [filteredItems, statusFilter, priorityFilter, categoryFilter])
+  }, [filteredItems, statusFilter, categoryFilter])
 
   // Stats
   const stats = useMemo(() => ({
@@ -127,12 +121,11 @@ const TodoModule = () => {
   // Reset des filtres
   const resetFilters = useCallback(() => {
     setStatusFilter('all')
-    setPriorityFilter('')
     setCategoryFilter('')
     setSearchTerm('')
   }, [setSearchTerm])
 
-  const hasActiveFilters = statusFilter !== 'all' || priorityFilter || categoryFilter || searchTerm
+  const hasActiveFilters = statusFilter !== 'all' || categoryFilter || searchTerm
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -218,7 +211,7 @@ const TodoModule = () => {
 
         {/* Filtres avancés */}
         {showFilters && (
-          <div className="grid sm:grid-cols-3 gap-4 mt-4 pt-4 border-t border-surface-200 dark:border-surface-700">
+          <div className="grid sm:grid-cols-2 gap-4 mt-4 pt-4 border-t border-surface-200 dark:border-surface-700">
             <Select
               label="Statut"
               value={statusFilter}
@@ -227,20 +220,6 @@ const TodoModule = () => {
                 { value: 'all', label: 'Tous' },
                 { value: 'active', label: 'En cours' },
                 { value: 'completed', label: 'Terminées' },
-              ]}
-              placeholder=""
-            />
-
-            <Select
-              label="Priorité"
-              value={priorityFilter}
-              onChange={(e) => setPriorityFilter(e.target.value)}
-              options={[
-                { value: '', label: 'Toutes' },
-                ...Object.entries(PRIORITY_LABELS).map(([value, label]) => ({
-                  value,
-                  label,
-                })),
               ]}
               placeholder=""
             />

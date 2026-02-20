@@ -3,15 +3,11 @@
  */
 
 import { useState } from 'react'
-import { MoreVertical, Edit2, Trash2, Calendar, Clock, Flag, Link2 } from 'lucide-react'
+import { MoreVertical, Edit2, Trash2, Calendar, Clock, Link2 } from 'lucide-react'
 import { Card, Badge, Checkbox, ConfirmDialog } from '../../../components/common'
 import { useClickOutside, useBoolean } from '../../../hooks'
 import { formatRelativeDate, formatTime, cn } from '../../../utils/helpers'
-import {
-  PRIORITY_LABELS,
-  PRIORITY_COLORS,
-  DEFAULT_TODO_CATEGORIES,
-} from '../../../utils/constants'
+import { DEFAULT_TODO_CATEGORIES,} from '../../../utils/constants'
 
 const TodoItem = ({ todo, onEdit, onDelete, onToggleComplete }) => {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -109,14 +105,6 @@ const TodoItem = ({ todo, onEdit, onDelete, onToggleComplete }) => {
 
             {/* Métadonnées */}
             <div className="flex flex-wrap items-center gap-2 mt-3">
-              {/* Priorité */}
-              <Badge
-                variant={PRIORITY_COLORS[todo.priority]}
-                size="sm"
-                dot
-              >
-                {PRIORITY_LABELS[todo.priority]}
-              </Badge>
 
               {/* Catégorie */}
               {category && (
@@ -155,11 +143,6 @@ const TodoItem = ({ todo, onEdit, onDelete, onToggleComplete }) => {
               )}
             </div>
           </div>
-
-          {/* Indicateur priorité haute */}
-          {todo.priority === 'high' && !todo.completed && (
-            <Flag className="h-4 w-4 text-danger flex-shrink-0" />
-          )}
         </div>
       </Card>
 
